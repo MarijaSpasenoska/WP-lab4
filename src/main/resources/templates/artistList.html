@@ -1,0 +1,30 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <main>
+        <h2>Select artist:</h2>
+        <form th:method="POST" th:action="@{/songDetails}">
+            <input type="hidden" name="trackId" th:value="${trackId}">
+            <div th:each="artist : ${listedArtists}">
+                <input type="radio" name="artistId" th:id="${artist.id}" th:value="${artist.id}" />
+                <label th:for="${artist.id}" th:text="${artist.firstName} + ' ' + ${artist.lastName}"></label>
+            </div>
+            <br/>
+            <span></spab><input type='submit' value='Submit'></span>
+
+
+        </form>
+        <form th:method="POST" th:action="@{/allsongs}">
+            <input type="hidden" name="artistId" th:value="${artistId}">
+            <input type="submit" value="Select artist">
+        </form>
+    </main>
+    <aside>
+        <table>
+            <tr>
+                <td><b>Track Id</b></td>
+                <td th:text="${trackId}" th:value="${trackId}"></td>
+                <td><b>Artist Id</b></td>
+                <td th:text="${artistId}" th:value="${artistId}"></td>
+            </tr>
+        </table>
+    </aside>
+</th:block>

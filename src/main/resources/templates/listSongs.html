@@ -1,0 +1,43 @@
+
+
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <main>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <h2>Add a new song:</h2>
+            <a th:href="@{/songs/add-form}">
+                <button type="button">Add new song</button>
+            </a>
+        </th:block>
+
+        <h2>Choose a song:</h2>
+        <form th:method="POST" th:action="@{/artist}">
+            <div th:each="song : ${songs}">
+                <input type="radio" name="trackId" th:value="${song.trackId}"
+                       th:text="'Title: ' + ${song.title} + ', Genre: ' + ${song.genre} + ', Release Year: ' + ${song.releaseYear} + ', Album: ' + ${song.album.name}"><br/>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <span>
+                        <a th:href="@{/songs/delete/{id}(id=${song.trackId})}">
+                            <button type="button">Delete song</button>
+                        </a>
+                    </span>
+                </th:block>
+
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <span>
+                        <a th:href="@{/songs/edit-form/{id}(id=${song.trackId})}">
+                            <button type="button">Edit song</button>
+                        </a>
+                    </span>
+                </th:block>
+                <br/>
+            </div>
+            <br/>
+            <th:block sec:authorize="isAuthenticated()">
+                <div>
+                    <input type='submit' value='Submit'>
+                </div>
+            </th:block>
+        </form>
+    </main>
+</th:block>

@@ -54,6 +54,7 @@ public class SongController {
     }
 
     @PostMapping("/songs/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String saveSong(@RequestParam(required = false) String title,
                            @RequestParam(required = false) Long trackId,
                            @RequestParam(required = false) String genre,

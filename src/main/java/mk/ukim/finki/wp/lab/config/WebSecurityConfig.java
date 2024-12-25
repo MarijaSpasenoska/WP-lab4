@@ -37,7 +37,6 @@ public class WebSecurityConfig{
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/songs", "/artist", "/assets/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/andrej/**").hasRole("ANDREJ")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
